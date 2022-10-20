@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Clockwork\Request\Request;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
@@ -65,6 +67,13 @@ class AdminPostController extends Controller
             'excerpt' => 'required',
             'body' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')]
+        ]);
+    }
+    public function blogSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Post::class, 'slug', $_GET['title']);
+        return response()->json([
+            'slug' => $slug,
         ]);
     }
 }

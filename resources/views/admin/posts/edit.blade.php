@@ -5,7 +5,7 @@
             @method('PATCH')
 
             <x-form.input name="title" :value="old('title', $post->title)" required />
-            <x-form.input name="slug" :value="old('slug', $post->slug)" required />
+            <x-form.input name="slug" :value="old('slug', $post->slug)" readonly />
 
             <div class="flex mt-6">
                 <div class="flex-1">
@@ -35,5 +35,16 @@
 
             <x-form.button>Update</x-form.button>
         </form>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script>
+            $("#title").change(function(e){
+                $.get('{{ route('blogSlug') }}',
+                    {'title':$(this).val()},
+                    function(data){
+                        $("#slug").val(data.slug);
+                    }
+                );
+            });
+        </script>
     </x-setting>
 </x-layout>

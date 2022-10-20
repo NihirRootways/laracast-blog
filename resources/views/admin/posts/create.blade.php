@@ -3,8 +3,8 @@
         <form method="POST" action="/admin/posts" enctype="multipart/form-data">
             @csrf
 
-            <x-form.input name="title" required />
-            <x-form.input name="slug" required />
+            <x-form.input name="title"  required />
+            <x-form.input name="slug" readonly required />
             <x-form.input name="thumbnail" type="file" required />
             <x-form.textarea name="excerpt" required />
             <x-form.textarea name="body" required />
@@ -26,5 +26,16 @@
 
             <x-form.button>Publish</x-form.button>
         </form>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script>
+            $("#title").change(function(e){
+                $.get('{{ route('blogSlug') }}',
+                    {'title':$(this).val()},
+                    function(data){
+                        $("#slug").val(data.slug);
+                    }
+                );
+            });
+        </script>
     </x-setting>
 </x-layout>
