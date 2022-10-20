@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting heading="Publish New Post">
+    <x-setting heading="Publish New Category">
         <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
             @csrf
             <x-form.input name="name"  required />
