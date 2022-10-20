@@ -40,8 +40,8 @@
                             </button>
                         </x-slot>
 
-                        @admin
-                            <x-dropdown-item
+                        @role('Admin')
+                        <x-dropdown-item
                                 href="/admin/posts"
                                 :active="request()->is('admin/posts')"
                             >
@@ -54,8 +54,7 @@
                             >
                                 New Post
                             </x-dropdown-item>
-                        @endadmin
-
+                        @endrole
                         <x-dropdown-item
                             href="#"
                             x-data="{}"
